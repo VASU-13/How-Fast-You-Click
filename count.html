@@ -1,0 +1,72 @@
+<html>
+<head>
+        <link rel="stylesheet" type="text/css" href="custom.css">
+
+</head>
+
+<h1> Test Your Reactions! </h1>
+
+<p> Click on boxes and circles as quickly as you can! </p>
+
+<p> Your time: <span id="tt"></span></p>
+
+<div id="square"></div>
+
+<script>
+
+  var begin = new Date().getTime();
+  function getcolor()
+  {
+    var str = "0123456789ABCDEF".split('');
+    var color = '#';
+    for (var i=0;i<6;i++)
+    {
+      color = color + str[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
+  function makeshape()
+  {
+    var top = Math.random() * 350;
+    var left = Math.random() * 350;
+    var width = Math.random() * 350;
+
+    if(Math.random() > 0.5)
+    {
+      document.getElementById("square").style.borderRadius="60%";
+    }
+    else {
+      document.getElementById("square").style.borderRadius="0";
+    }
+
+    document.getElementById("square").style.backgroundColor=getcolor();
+
+    document.getElementById("square").style.top = top + "px";
+    document.getElementById("square").style.top = width + "px";
+    document.getElementById("square").style.left = left + "px";
+
+    document.getElementById("square").style.display = "block";
+    begin = new Date().getTime();
+  }
+  function makeshapeagain()
+  {
+    setTimeout(makeshape, Math.random() * 1500);
+  }
+  makeshapeagain()
+
+  document.getElementById("square").onclick = function()
+  {
+    document.getElementById("square").style.display = "none";
+    var end = new Date().getTime();
+    var totaltime = (end - begin) / 1000;
+    document.getElementById("tt").innerHTML = totaltime + "s";
+    makeshapeagain()
+
+  }
+</script>
+
+
+
+</body>
+
+</html>
